@@ -28,5 +28,6 @@ class data(Dataset):
 
     def __getitem__(self, idx) -> Tuple[torch.Tensor, torch.Tensor]:
         low_res: torch.Tensor = self.read_image(self.low_res_path, self.low_res_image[idx])
-        high_res: torch.Tensor = self.read_image(self.high_res_path, self.high_res_image[idx])
+        lr_h, lr_w, _ = low_res.shape
+        high_res: torch.Tensor = self.read_image(self.high_res_path, self.high_res_image[idx])[:,:lr_h*8,:lr_w*8]
         return low_res, high_res
