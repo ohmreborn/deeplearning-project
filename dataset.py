@@ -15,7 +15,9 @@ class data(Dataset):
         self.low_res_image: List[str] = os.listdir(self.low_res_path)
         self.high_res_image: List[str] = os.listdir(self.high_res_path)
 
-    def read_image(self, prefix_path, path) -> torch.Tensor:
+
+    @staticmethod
+    def read_image(prefix_path: str, path: str) -> torch.Tensor:
         # Read image
         img = cv2.imread(os.path.join(prefix_path, path))
         # Check if loaded successfully
@@ -28,9 +30,9 @@ class data(Dataset):
         return len(self.low_res_image)
 
     def __getitem__(self, idx) -> Tuple[torch.Tensor, torch.Tensor]:
-        low_res: torch.Tensor = self.read_image(self.low_res_path, self.low_res_image[idx])
+        low_res: torch.Tensor = data.read_image(self.low_res_path, self.low_res_image[idx])
         _, lr_h, lr_w = low_res.shape
-        high_res: torch.Tensor = self.read_image(self.high_res_path, self.high_res_image[idx])
+        high_res: torch.Tensor = data.read_image(self.high_res_path, self.high_res_image[idx])
         high_res = F.interpolate(high_res.unsqueeze(0), size=(lr_h*8, lr_w*8)).squeeze(0)
 
         return low_res, high_res
