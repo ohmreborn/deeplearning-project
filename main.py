@@ -22,8 +22,8 @@ num_epochs: int = 1
 mse: nn.MSELoss = nn.MSELoss()
 bce: nn.BCEWithLogitsLoss = nn.BCEWithLogitsLoss()
 l1: nn.L1Loss = nn.L1Loss()
-opt_G: torch.optim.Adam = torch.optim.Adam(G.parameters(), lr=lr)
-opt_D: torch.optim.Adam = torch.optim.Adam(D.parameters(), lr=lr)
+opt_G: torch.optim.AdamW = torch.optim.AdamW(G.parameters(), lr=lr)
+opt_D: torch.optim.AdamW = torch.optim.AdamW(D.parameters(), lr=lr)
 
 dataset: data = data("dataset")
 dataloader = DataLoader(dataset, batch_size=1, shuffle=True)
@@ -85,11 +85,6 @@ for epoch in range(num_epochs):
         # Accumulate losses (multiply back to get actual loss)
         total_d_loss += d_loss.item() * gradient_accumulation_step
         total_g_loss += g_loss.item() * gradient_accumulation_step
-        
-        # Free memory periodically
-        if i % 100 == 0:
-            torch.cuda.empty_cache()
-            gc.collect()
         
         # Print progress
         if (i + 1) % gradient_accumulation_step == 0:

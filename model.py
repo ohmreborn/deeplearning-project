@@ -70,7 +70,7 @@ class Generator(nn.Module):
     def __init__(
             self, 
             in_channel: int = 3, 
-            num_channel:int = 32, 
+            num_channel:int = 16, 
             num_block: int = 8 
             ):
         super().__init__()
@@ -94,7 +94,7 @@ class Generator(nn.Module):
         return torch.tanh(self.final(out))
 
 class Discriminator(nn.Module):
-    def __init__(self, in_channel=3, features: List[int]=[68, 68, 128, 128, 256, 256, 512, 512]) -> None:
+    def __init__(self, in_channel=3, features: List[int]=[68, 68, 128, 128, 256, 256]) -> None:
         super().__init__()
         block: List[ConvBlock] = []
         for idx, feature in enumerate(features):
@@ -115,7 +115,7 @@ class Discriminator(nn.Module):
         self.classifier = nn.Sequential(
                 nn.AdaptiveAvgPool2d((6, 6)),
                 nn.Flatten(),
-                nn.Linear(512*6*6, 1024),
+                nn.Linear(256*6*6, 1024),
                 nn.LeakyReLU(0.2, inplace=True),
                 nn.Linear(1024, 1)
                 )
