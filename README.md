@@ -7,7 +7,8 @@ Discriminator:
 <img width="110" height="567" alt="ภาพถ่ายหน้าจอ 2568-11-04 เวลา 23 08 15" src="https://github.com/user-attachments/assets/14bfe2c1-d9f0-4b6a-8e6e-59ae5ebf71bf" />
 
 
-Generator:<img width="106" height="447" alt="ภาพถ่ายหน้าจอ 2568-11-04 เวลา 23 09 46" src="https://github.com/user-attachments/assets/53cedd43-93ef-428b-b208-ea2e18347e6c" />
+Generator:
+<img width="106" height="447" alt="ภาพถ่ายหน้าจอ 2568-11-04 เวลา 23 09 46" src="https://github.com/user-attachments/assets/53cedd43-93ef-428b-b208-ea2e18347e6c" />
   
 
 โดย แต่ละส่วนของ code มีดังนี้ 
