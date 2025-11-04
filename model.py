@@ -127,6 +127,7 @@ def test() -> None:
     low_resolution: int = 28
     x: torch.Tensor = torch.randn(5 ,3, low_resolution, low_resolution)
     gen: Generator = Generator()
+    print(gen)
     gen_out: torch.Tensor = gen(x)
     disc: Discriminator = Discriminator()
     disc_out: torch.Tensor = disc(gen_out)
