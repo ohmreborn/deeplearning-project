@@ -28,4 +28,4 @@ for epoch in range(100):
         epoch_loss += loss.item()
 
     print(f"Epoch {epoch+1}: Loss={epoch_loss/len(dataloader):.6f}")
-
+torch.save({"model": model.state_dict()}, f'checkpoint.pth')
