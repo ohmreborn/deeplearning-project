@@ -40,20 +40,13 @@ for epoch in range(num_epochs):
         # Train Discriminator
         # ---------------------
         fake = G(lr_batch).detach()
-        print("fake")
         real_logits = D(hr_batch)
-        print("fake")
         fake_logits = D(fake)
-        print("fake")
         d_loss_real = bce(real_logits, torch.ones_like(real_logits))
-        print("fake")
         d_loss_fake = bce(fake_logits, torch.zeros_like(fake_logits))
-        print("fake")
         d_loss = (d_loss_real + d_loss_fake) * 0.5
         d_loss /= gradient_accumulation_step
-        print("fake")
         d_loss.backward(); 
-        print("fake")
         if (i % gradient_accumulation_step == gradient_accumulation_step-1):
             opt_D.step()
             opt_D.zero_grad()
@@ -61,7 +54,6 @@ for epoch in range(num_epochs):
         # Train Generator
         # ---------------------
         fake = G(lr_batch)
-        print(lr_batch.shape, hr_batch.shape, fake.shape)
         # Adversarial loss (want D(fake) -> 1)
         adv_loss = bce(D(fake), torch.ones_like(fake_logits))
         # Pixel loss
