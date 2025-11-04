@@ -2,6 +2,7 @@ import os
 from typing import List, Tuple
 import cv2
 import torch
+import torch.nn.functional as F
 from torch.utils.data import Dataset
 
 class data(Dataset):
@@ -28,6 +29,8 @@ class data(Dataset):
 
     def __getitem__(self, idx) -> Tuple[torch.Tensor, torch.Tensor]:
         low_res: torch.Tensor = self.read_image(self.low_res_path, self.low_res_image[idx])
-        lr_h, lr_w, _ = low_res.shape
-        high_res: torch.Tensor = self.read_image(self.high_res_path, self.high_res_image[idx])[:,:lr_h*8,:lr_w*8]
+        _, lr_h, lr_w = low_res.shape
+        high_res: torch.Tensor = self.read_image(self.high_res_path, self.high_res_image[idx])
+        high_res = F.interpolate(high_res.unsqueeze(0), size=(lr_h*8, lr_w*8)).squeeze(0)
+
         return low_res, high_res

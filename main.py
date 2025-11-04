@@ -60,7 +60,6 @@ for epoch in range(num_epochs):
         # ---------------------
         # Train Generator
         # ---------------------
-        print("Train Generator")
         fake = G(lr_batch)
         print(lr_batch.shape, hr_batch.shape, fake.shape)
         # Adversarial loss (want D(fake) -> 1)
