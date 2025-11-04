@@ -70,8 +70,8 @@ class Generator(nn.Module):
     def __init__(
             self, 
             in_channel: int = 3, 
-            num_channel:int = 64, 
-            num_block: int = 16
+            num_channel:int = 32, 
+            num_block: int = 8 
             ):
         super().__init__()
         self.initial: ConvBlock = ConvBlock(
